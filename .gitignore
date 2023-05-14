@@ -1,0 +1,11 @@
+#this is for sass
+.sass-cache/
+sass
+*.sass
+*.css.map
+*.sass.map
+*.scss.map
+
+#this is for node
+node_modules
+*.json
