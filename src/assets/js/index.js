@@ -1,6 +1,5 @@
 
 const initMenu = () => {
-    const areaMenu = document.querySelector('.header__content-nav')
     const openMenu = document.getElementById('open-menu');
     const closeMenu = document.getElementById('close-menu');
     const menuActivator = document.getElementById('menu-activator');
@@ -15,4 +14,22 @@ const initMenu = () => {
     });
 }
 
+const initLog = () => {
+    const openLog = document.querySelector('#opn-lg');
+    const closeLog = document.querySelector('#cl-lg');
+    const logActivator = document.querySelector('.login-space');
+    const reactiveLog = 'active-log';
+
+    openLog.addEventListener('click', () => {
+        logActivator.classList.add(reactiveLog);
+    });
+
+    closeLog.addEventListener('click', () => {
+        logActivator.classList.remove(reactiveLog);
+    });
+}
+
 initMenu();
+initLog();
+
+
