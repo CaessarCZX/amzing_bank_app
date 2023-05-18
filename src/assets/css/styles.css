@@ -17,6 +17,11 @@ body {
   background-attachment: fixed;
 }
 
+.color-dashboard {
+  background: none;
+  background-color: #171531;
+}
+
 h1 {
   color: #fff;
   font-size: 4rem;
@@ -155,7 +160,7 @@ header .nav-wrapper {
   align-items: center;
   max-width: 1320px;
   flex-wrap: wrap;
-  gap: 0.3rem;
+  gap: 1rem;
   flex: 1;
 }
 header .nav-wrapper .header__content-nav {
@@ -229,6 +234,9 @@ header .nav-wrapper .header__wrap-menu::after {
   header .nav-wrapper .btn-primary {
     display: none;
   }
+  header .nav-wrapper .btn-secondary {
+    display: none;
+  }
 }
 @media screen and (max-width: 650px) {
   header .nav-wrapper .header__wrap-menu {
@@ -250,31 +258,47 @@ Add this rules for container to '.container'
   display: flex;
   margin: 1rem;
   flex: 1;
+  gap: 1rem;
   flex-wrap: wrap;
   max-width: 1320px;
 }
+.container.screen-md-max {
+  margin: 2rem;
+  max-width: 1050px;
+}
 .container .row {
   display: grid;
+  gap: 1rem;
   min-width: 100%;
   grid-template-columns: repeat(12, 1fr);
 }
+.container .row.cards-show {
+  padding: 2rem 0 2rem;
+  gap: 2rem;
+  height: 400px;
+}
 .container .row .col-2 {
+  display: flex;
   grid-column-start: auto;
   grid-column-end: span 2;
 }
 .container .row .col-4 {
+  display: flex;
   grid-column-start: auto;
   grid-column-end: span 4;
 }
 .container .row .col-6 {
+  display: flex;
   grid-column-start: auto;
   grid-column-end: span 6;
 }
 .container .row .col-8 {
+  display: flex;
   grid-column-start: auto;
   grid-column-end: span 8;
 }
 .container .row .col-12 {
+  display: flex;
   grid-column-start: auto;
   grid-column-end: span 12;
 }
@@ -300,10 +324,6 @@ Add this rules for container to '.container'
   .container .row .col-2 {
     grid-column-start: auto;
     grid-column-end: span 6;
-  }
-  .container .row .col-4 {
-    grid-column-start: auto;
-    grid-column-end: span 8;
   }
   .container .row .col-6 {
     grid-column-start: auto;
@@ -383,7 +403,7 @@ main {
   }
 }
 
-.login-space {
+.float-space {
   position: absolute;
   display: flex;
   visibility: hidden;
@@ -405,40 +425,128 @@ main {
   box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
   transition: opacity 0.3s ease-in;
 }
-.login-space.active-log {
+.float-space.active-space {
   visibility: visible;
   opacity: 1;
 }
-.login-space .title__login {
+
+.card-dashboard {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  background-color: #25204d;
+  padding: 1rem;
+  border-radius: 21px;
+  overflow: hidden;
+}
+
+.dashboard-principal {
+  display: inherit;
+  flex-wrap: wrap;
+  position: relative;
+  justify-content: center;
+}
+.dashboard-principal .dashboard-principal__image {
+  align-self: center;
+  position: relative;
+  z-index: 1;
+}
+.dashboard-principal .dashboard-principal__image::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 0;
+  left: 0;
+  transform: translate(-2px, 4px);
+  border-radius: 50%;
+  border: solid 1px #7f51e9;
+  background-color: #282358;
+}
+.dashboard-principal .dashboard-principal__image img {
+  width: 100%;
+  object-fit: cover;
+}
+.dashboard-principal .dashboard-principal__info {
+  display: inherit;
+  flex-direction: column;
+  margin: 3rem;
+  flex-wrap: nowrap;
+  z-index: 1;
+}
+.dashboard-principal .dashboard-principal__info h1 {
+  font-weight: 200;
+  line-height: 1.2;
+}
+.dashboard-principal .dashboard-principal__info .info__name-client {
+  color: #fff;
+  flex: 1;
+  line-height: 3.5rem;
+  font-size: 3rem;
+  max-width: 588px;
+  font-weight: 700;
+}
+.dashboard-principal .dashboard-principal__info h4 {
+  padding-top: 1rem;
+  font-weight: lighter;
+  color: #fff;
+}
+.dashboard-principal .dashboard-principal__info .info__balance-client {
+  font-size: 3rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #04b94f;
+}
+.dashboard-principal .dashboard-principal__info .info__balance-client .nom-sym {
+  font-size: xx-large;
+}
+.dashboard-principal .dashboard-principal__info .info__balance-client .nom-div {
+  font-size: xx-large;
+  color: #56566d;
+  font-weight: lighter;
+}
+.dashboard-principal .bg-style-dashboard {
+  width: 1vw;
+  max-height: 1vh;
+}
+.dashboard-principal .bg-style-dashboard img {
+  position: absolute;
+  width: 45vh;
+  object-fit: cover;
+}
+
+.title__login {
   display: inherit;
   justify-content: space-between;
 }
-.login-space .title__login button {
+.title__login button {
   font-size: 2rem;
   background-color: transparent;
   align-self: baseline;
 }
-.login-space .title__login h3 {
+.title__login h3 {
   font-size: 4.5rem;
   color: #25204d;
   width: 250px;
 }
-.login-space .login-content {
+
+.login-content {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
-.login-space .login-content label {
+.login-content label {
   font-weight: lighter;
   color: #25204d;
 }
-.login-space .login-content input {
+.login-content input {
   display: flex;
   padding: 1rem;
   border-radius: 5px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
-.login-space .login-content button {
+.login-content button {
   margin-top: 1rem;
   width: 100%;
   border-radius: 7px;

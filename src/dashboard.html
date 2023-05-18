@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>My Account</title>
+</head>
+<body class="color-dashboard">
+    <header>
+        <div class="nav-wrapper">
+            <a href="#" class="container__logo-md">
+                <img src="assets/img/logo-bank.png" title="Amzing Bank" alt="Amzing bank logo">
+            </a>
+            <nav class="header__content-nav">
+                <ul class="header__wide-menu" id="menu-activator">
+                    <button class="wide-menu__element wrap-active close-button" id="close-menu">x</button>
+                    <a class="wide-menu__element" href="#">MY WALLET</a>
+                    <a class="wide-menu__element" href="#">EASY-TRANSFER</a>
+                    <a class="wide-menu__element" href="#">PAY SERVICES</a>
+                    <a class="wide-menu__element wrap-active" id="exit-account-secondary">LOG OUT</a>
+                </ul>
+                <button class="btn-secondary" title="Leave account" id="exit-account">LOG OUT</button>
+                <button class="header__wrap-menu" id="open-menu"></button>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container screen-md-max">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-dashboard">
+                        <div class="dashboard-principal">
+                            <picture class="dashboard-principal__image">
+                                <img src="assets/img/default-person.png" alt="">
+                            </picture>
+                            <div class="dashboard-principal__info">
+                                <h1>Hola</h1>
+                                <div class="info__name-client">
+                                    <span>user_name</span>
+                                </div>
+                                <h4>Available balance</h4>
+                                <div class="info__balance-client">
+                                    <span class="nom-sym">$</span>
+                                    <span id="show-balance">0</span>
+                                    <span class="nom-div">MXN</span>
+                                </div>
+                            </div>
+                            <div class="bg-style-dashboard">
+                                <img src="assets/img/man-illustration.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row cards-show">
+                <div class="col-4">
+                    <div class="card-dashboard"></div>
+                </div>
+                <div class="col-4">
+                    <div class="card-dashboard"></div>
+                </div>
+                <div class="col-4">
+                    <div class="card-dashboard"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+          <div class="row spacing-row">
+            <div class="col-2">
+                <a href="#" class="container__logo-sm">
+                  <img src="assets/img/logo-bank.png" alt="">
+                </a>
+            </div>
+            <div class="col-4">
+            </div>
+          </div>
+          <div class="row"></div>
+        </div>
+      </footer>
+      <script type="module" src="assets/js/index.js" defer></script>
+</body>
+</html>
