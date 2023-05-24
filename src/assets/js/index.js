@@ -1,15 +1,9 @@
-import { User } from "./User.js";
-
-
 // Session storage variables
 let users = [];
 let authSession = false;
 let userStatement = JSON.parse(localStorage.getItem('userStatement')) ?? 0;
 authSession = JSON.parse(localStorage.getItem('authSession')) ?? false;
 const leaveSession = document.querySelector('#exit-account');
-
-//First User
-const admin = new User('Cesar Jhonatan', 'Tun Cetina', 'sfsfsfsfsfsfs', 26, 'micorreo@mail.com', 5555555555, 'M1Passw00rd$', 10000);
 
 // vars for active spaces
 const loginActivator = document.querySelector('#login-space') ?? false;
@@ -48,25 +42,24 @@ const initFloatWindow = (nodeElement) => {
 }
 
 // Function to add var to localSotorage 
+// !Important note: if you are going to use this method, you must always to include the var as an object
+// Example: addLocalStorage({myVar});
 const addLocalStorage = (varToJSON) => {
   const varToString = varObj => Object.keys(varObj)[0];
-  const varStringify = varToString(varToJSON);
-  for (let vars in varToJSON) {
-    console.log(vars);
-  }
-
+  const varToFirstValue = varObj => Object.values(varObj)[0];
+  localStorage.setItem(varToString(varToJSON),JSON.stringify(varToFirstValue(varToJSON)));
 }
 
 // For Join session
 const joinSession = (form) => {
   const availableStorage = JSON.parse(localStorage.getItem('users'));
   console.log(availableStorage);
-  addLocalStorage({users});
+  // addLocalStorage({users});
   if (availableStorage) {
     users = availableStorage
 
   } else {
-    users.push(admin);
+    
   }
   // console.log(users[0].email, users[0].getPassword(true));
 
@@ -89,7 +82,7 @@ const joinSession = (form) => {
           userStatement = i;
           localStorage.setItem('userStatement', JSON.stringify(userStatement));
           localStorage.setItem('authSession', JSON.stringify(authSession));
-          window.location.href = 'dashboard.html';
+          window.location.href = 'src/dashboard.html';
         }
       }
     }
@@ -98,11 +91,10 @@ const joinSession = (form) => {
 
 // For close session
 const closeSession = (closeElement) => {
-
   console.log(closeElement)
   closeElement.addEventListener('click', () => {
     authSession = false;
-    userStatement = 0;
+    userStatement = -1;
     console.log(authSession);
     localStorage.setItem('authSession', JSON.stringify(authSession));
     localStorage.setItem('userStatement', JSON.stringify(userStatement));
