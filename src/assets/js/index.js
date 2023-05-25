@@ -1,13 +1,11 @@
-// Session storage variables
-let users = [];
-let authSession = false;
-let userStatement = JSON.parse(localStorage.getItem('userStatement')) ?? 0;
-authSession = JSON.parse(localStorage.getItem('authSession')) ?? false;
-const leaveSession = document.querySelector('#exit-account');
+// For save Session storage
+// let authSession = JSON.parse(localStorage.getItem('authSession')) ?? false;
+let currentUser = JSON.parse(localStorage.getItem('currentUser')) ?? false;
 
 // vars for active spaces
 const loginActivator = document.querySelector('#login-space') ?? false;
 const initSession = document.querySelector('#log-session') ?? false;
+const leaveSession = document.querySelector('#exit-account') ?? false;
 
 
 //For wrapper menu
@@ -41,27 +39,25 @@ const initFloatWindow = (nodeElement) => {
   });
 }
 
-// Function to add var to localSotorage 
+// Functions to Local Storage
 // !Important note: if you are going to use this method, you must always to include the var as an object
 // Example: addLocalStorage({myVar});
-const addLocalStorage = (varToJSON) => {
+const addLocalStorage = (varSave, customName = null) => {
   const varToString = varObj => Object.keys(varObj)[0];
-  const varToFirstValue = varObj => Object.values(varObj)[0];
-  localStorage.setItem(varToString(varToJSON),JSON.stringify(varToFirstValue(varToJSON)));
+  const varValue = varObj => Object.values(varObj)[0];
+  const nameVarToJSON = customName ?? varToString(varSave);
+  const contentVarToJSON = varValue(varSave);
+  localStorage.setItem(nameVarToJSON,JSON.stringify(contentVarToJSON));
+}
+
+const removeLocalStorage = (varRemove) => {
+  const varToString = varObj => Object.keys(varObj)[0];
+  const nameVarToJSON = varToString(varRemove);
+  localStorage.removeItem(nameVarToJSON);
 }
 
 // For Join session
 const joinSession = (form) => {
-  const availableStorage = JSON.parse(localStorage.getItem('users'));
-  console.log(availableStorage);
-  // addLocalStorage({users});
-  if (availableStorage) {
-    users = availableStorage
-
-  } else {
-    
-  }
-  // console.log(users[0].email, users[0].getPassword(true));
 
   let getUser = '';
   let getPass = '';
@@ -73,18 +69,19 @@ const joinSession = (form) => {
     getUser = inputUser.value;
     getPass = inputPass.value;
     if (getUser && getPass) {
-      for (let i = 0; i < users.length; i++) {
-        if (users[i].email === getUser && users[i].getPassword(true) === getPass) {
-          console.log('Iniciaste sesion'); //
-          inputUser.value = '';
-          inputPass.value = '';
-          authSession = true;
-          userStatement = i;
-          localStorage.setItem('userStatement', JSON.stringify(userStatement));
-          localStorage.setItem('authSession', JSON.stringify(authSession));
-          window.location.href = 'src/dashboard.html';
-        }
-      }
+      fetch('api/users.json')
+        .then(response => response.json())
+        .then(response => {
+          const userFound = response.find(user => user.email === getUser && user.password === getPass || user.username === getUser && user.password === getPass);
+          if (userFound) {
+            currentUser = userFound;
+            addLocalStorage({currentUser});
+            window.location.href = 'src/dashboard.html'
+          }
+        })
+        .catch(error => {
+          console.error('Error al realizar la solicitud:', error);
+        });
     }
   });
 }
@@ -93,13 +90,18 @@ const joinSession = (form) => {
 const closeSession = (closeElement) => {
   console.log(closeElement)
   closeElement.addEventListener('click', () => {
-    authSession = false;
-    userStatement = -1;
-    console.log(authSession);
-    localStorage.setItem('authSession', JSON.stringify(authSession));
-    localStorage.setItem('userStatement', JSON.stringify(userStatement));
-    window.location.href = 'index.html';
+    // authSession = false;
+    currentUser = false;
+    removeLocalStorage({currentUser})
+    window.location.href = '../index.html';
   })
+}
+
+const renderUserDashboard = (currentUser) => {
+  const nameClient = document.querySelector('#show-name-client');
+  const balanceClient = document.querySelector('#show-balance-client');
+  nameClient.textContent = `${currentUser.name} ${currentUser.lastName}`;
+  balanceClient.textContent = `${currentUser.accounts[0].balance}`
 }
 
 initMenu();
@@ -111,4 +113,7 @@ if (initSession) {
 }
 if (leaveSession) {
   closeSession(leaveSession);
+}
+if (currentUser) {
+  renderUserDashboard(currentUser);
 }

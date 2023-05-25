@@ -261,6 +261,7 @@ Add this rules for container to '.container'
   gap: 1rem;
   flex-wrap: wrap;
   max-width: 1320px;
+  min-width: 384px;
 }
 .container.screen-md-max {
   margin: 2rem;
@@ -448,6 +449,8 @@ main {
 }
 .dashboard-principal .dashboard-principal__image {
   align-self: center;
+  width: 65vw;
+  max-width: 300px;
   position: relative;
   z-index: 1;
 }
@@ -455,8 +458,10 @@ main {
   content: "";
   z-index: -1;
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 65vw;
+  height: 65vw;
+  max-width: 300px;
+  max-height: 300px;
   top: 0;
   left: 0;
   transform: translate(-2px, 4px);
@@ -507,13 +512,24 @@ main {
   font-weight: lighter;
 }
 .dashboard-principal .bg-style-dashboard {
-  width: 1vw;
-  max-height: 1vh;
+  display: inherit;
+  position: absolute;
+  right: 15rem;
+  width: 2.5vw;
+  height: 100%;
 }
 .dashboard-principal .bg-style-dashboard img {
-  position: absolute;
-  width: 45vh;
+  width: 35vw;
   object-fit: cover;
+}
+@media screen and (max-width: 300px) {
+  .dashboard-principal .dashboard-principal__info h1 {
+    font-size: 3rem;
+  }
+  .dashboard-principal .dashboard-principal__info .info__name-client {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
 }
 
 .title__login {
